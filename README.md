@@ -18,5 +18,5 @@ An example for getting all concordances for North Sami corpora in Giellatekno Ko
 
 # Licence
 Apache License 2.0
-(C) [Mika Hämäläinen](https://mikakalevi.com) 2017
+(C) 2017 [Mika Hämäläinen](https://mikakalevi.com)
 
