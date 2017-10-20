@@ -1,6 +1,10 @@
 # Korp API for Python
 Library for Python to use Korp API. This library provides an easy way to query [Korp systems](https://spraakbanken.gu.se/swe/forskning/infrastruktur/korp/) for language corpora.
 
+# Installation
+
+    sudo pip install korp
+
 # Usage
 
 You can initialise Korp with either service_name ([språkbanken](https://spraakbanken.gu.se/korp/#?lang=sv), [kielipankki](https://korp.csc.fi) or [GT](http://gtweb.uit.no/korp)) or url to your Korp’s API interface such as https://korp.csc.fi/cgi-bin/korp.cgi .
