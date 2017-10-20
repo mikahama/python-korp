@@ -1,0 +1,58 @@
+{
+  "concordance": [
+    "[?] cqpn = (n is an integer) Additional CQP query expressions limiting the scope of the matches: the query results are only shown for structures (as specified with defaultwithin or within) that contain a match for all the queries. See below for more information.",
+    "[?] defaultcontext = n struct: The default context (n struct elements) to show around the match: typically 1 sentence or 1 paragraph to show only the containing sentence or paragraph. You can also use nwords to show n words around the match, disregarding structure boundaries.",
+    "[?+] context = corpus:n struct: The context to show for corpus corpus instead of the default",
+    "[?+] show = The positional attributes to show for tokens (from the list of attrs.p returned by the info for a corpus), and also the structures whose opening and closing is to be shown within tokens (from the list of attrs.s returned by the info for a corpus, typically structure names without an underscore)",
+    "[?+] show_struct = The structural attributes to show (from the list of attrs.s returned by the info for a corpus)",
+    "[?] cut = The maximum number of hits to search",
+    "[?] defaultwithin = struct: Limit search witihin the structural attribute struct",
+    "[?+] within = corpus:struct: Limit search in corpus corpus within struct instead of the structure given with defaultwithin",
+    "[?] sort = Sort criterion for the search results within each corpus: one of keyword (the searched word), left (left context), right (right context) or random (random order)",
+    "[?] random_seed = n: Use n as the seed for the random number generator, to get a reproducible random order with sort=random",
+    "[?] incremental = true: Return results incrementally (as soon as the results for each corpus are ready) for a search from multiple corpora"
+  ],
+  "all_concordances": [
+    "[?] cqpn = (n is an integer) Additional CQP query expressions limiting the scope of the matches: the query results are only shown for structures (as specified with defaultwithin or within) that contain a match for all the queries. See below for more information.",
+    "[?] defaultcontext = n struct: The default context (n struct elements) to show around the match: typically 1 sentence or 1 paragraph to show only the containing sentence or paragraph. You can also use nwords to show n words around the match, disregarding structure boundaries.",
+    "[?+] context = corpus:n struct: The context to show for corpus corpus instead of the default",
+    "[?+] show = The positional attributes to show for tokens (from the list of attrs.p returned by the info for a corpus), and also the structures whose opening and closing is to be shown within tokens (from the list of attrs.s returned by the info for a corpus, typically structure names without an underscore)",
+    "[?+] show_struct = The structural attributes to show (from the list of attrs.s returned by the info for a corpus)",
+    "[?] cut = The maximum number of hits to search",
+    "[?] defaultwithin = struct: Limit search witihin the structural attribute struct",
+    "[?+] within = corpus:struct: Limit search in corpus corpus within struct instead of the structure given with defaultwithin",
+    "[?] sort = Sort criterion for the search results within each corpus: one of keyword (the searched word), left (left context), right (right context) or random (random order)",
+    "[?] random_seed = n: Use n as the seed for the random number generator, to get a reproducible random order with sort=random",
+    "[?] incremental = true: Return results incrementally (as soon as the results for each corpus are ready) for a search from multiple corpora"
+  ],
+  "statistics": [
+    "[?] cqpn = Additional CQP query expressions (n is an integer); see the description above for KWIC concordance (not applicable to count_all)",
+    "[?] defaultwithin = struct: Limit search witihin the structural attribute struct",
+    "[?+] within = corpus:struct: Limit search in corpus corpus within struct instead of the structure given with defaultwithin",
+    "[?+] ignore_case = Attributes for which case is ignored",
+    "[?] start = The number of the first row (gropuby attribute value) to return",
+    "[?] end = The number of the last row to return",
+    "[?] incremental = true: Return results incrementally (as soon as the results for each corpus are ready) for a search from multiple corpora"
+  ],
+  "log_likelihood": [
+    "[?] max = The maximum number of results",
+    "[?] incremental = true: Return results incrementally (as soon as the results for each corpus are ready) for a search from multiple corpora"
+  ],
+  "word_picture": [
+    "[?] type = Search type: word (word form; the default) or lemgram",
+    "[?] min = Minimum frequency to be shown",
+    "[?] max = The maximum number of results (0 = no limit)",
+    "[?] incremental: Return information incrementally as the computing is ready for each individual corpus"
+  ],
+  "trend_diagram": [
+    "[?] subcqpn = Subquery of the CQP query above; n is a number; see below for further information.",
+    "[?] granularity = Temporal granularity of the result: y (year; the default), m (month) or d (day)",
+    "[?] incremental = true: Return results incrementally (as soon as the results for each corpus are ready) for a search from multiple corpora"
+  ],
+  "word_picture_hits": [
+    "[?] dep = Dependent lemgram",
+    "[?] depextra = Dependent prefix",
+    "[?] start = The number of the first hit to include in the concordance (starting from 0)",
+    "[?] end = The number of the last hit to include in the concordance"
+  ]
+}
