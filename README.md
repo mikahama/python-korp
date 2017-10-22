@@ -18,7 +18,7 @@ An example for getting all concordances for North Sami corpora in Giellatekno Ko
     
 # More information
 
-See the Wiki for [a complete description](https://github.com/mikahama/python-korp/wiki) or my blog for [real life Korp example](https://mikalikes.men/korp-and-python-access-corpora-from-your-python-code/).
+See the Wiki for [a complete description](https://github.com/mikahama/python-korp/wiki) or my blog for [a real life Korp example](https://mikalikes.men/korp-and-python-access-corpora-from-your-python-code/).
 
 # Licence
 Apache License 2.0
