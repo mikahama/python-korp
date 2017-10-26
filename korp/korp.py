@@ -65,9 +65,9 @@ class Korp(object):
 			n, more_kwic = self.concordance(query, corpora, start=start, end=end, additional_parameters=additional_parameters)
 			start = start + 1000
 			kwic.extend(more_kwic)
-		if use_function_on_iteration is not None:
-			use_function_on_iteration(kwic,iteration_count)
-			kwic = []
+			if use_function_on_iteration is not None:
+				use_function_on_iteration(kwic,iteration_count)
+				kwic = []
 		return total, kwic
 
 	def corpus_information(self, corpora):
