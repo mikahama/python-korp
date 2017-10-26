@@ -49,10 +49,15 @@ class Korp(object):
 		self.__check_error__(data)
 		return data["hits"], data["kwic"]
 
-	def all_concordances(self, query, corpora, additional_parameters={"show":["word", "lemma", "lemmacomp", "pos", "msd", "ref", "dephead", "deprel", "lex"]}):
+	def all_concordances(self, query, corpora, additional_parameters={"show":["word", "lemma", "lemmacomp", "pos", "msd", "ref", "dephead", "deprel", "lex"]}, use_function_on_iteration=None):
 		total, kwic = self.concordance(query, corpora, additional_parameters=additional_parameters)
+		iteration_count = 0
+		if use_function_on_iteration is not None:
+			use_function_on_iteration(kwic,iteration_count)
+			kwic = []
 		start = 1000
 		while start < total:
+			iteration_count = iteration_count + 1
 			if total < start + 999:
 				end = total
 			else:
@@ -60,6 +65,9 @@ class Korp(object):
 			n, more_kwic = self.concordance(query, corpora, start=start, end=end, additional_parameters=additional_parameters)
 			start = start + 1000
 			kwic.extend(more_kwic)
+		if use_function_on_iteration is not None:
+			use_function_on_iteration(kwic,iteration_count)
+			kwic = []
 		return total, kwic
 
 	def corpus_information(self, corpora):

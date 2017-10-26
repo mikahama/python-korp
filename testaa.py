@@ -1,14 +1,15 @@
 from korp import Korp
 import pickle, json, codecs
 
-korppi = Korp(service_name="kielipankki")
-#corpora = korppi.list_corpora("SME")
-corpora = ["S24"]
+korppi = Korp(service_name="GT")
+corpora = korppi.list_corpora("SME_")
+#corpora = ["S24"]
 #print korppi.word_picture_hits('villiinty\xe4..vb.1', corpora, "ADV", ["S24:16174044", "S24:2343136"])
-print korppi.list_additional_parameters(korppi.all_concordances)
+#print(korppi.list_additional_parameters(korppi.all_concordances))
 
 
-#number, concordances = korppi.all_concordances('[pos="A"] "go" [pos="N"]', corpora)
+number, concordances = korppi.all_concordances('[pos="A"] "go" [pos="N"]', corpora)
+print concordances
 #pickle.dump(concordances, open("test.bin", "wb"))
 
 #print number
