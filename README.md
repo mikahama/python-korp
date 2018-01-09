@@ -20,6 +20,14 @@ An example for getting all concordances for North Sami corpora in Giellatekno Ko
 
 See the Wiki for [a complete description](https://github.com/mikahama/python-korp/wiki) or my blog for [a real life Korp example](https://mikalikes.men/korp-and-python-access-corpora-from-your-python-code/).
 
+# Cite
+
+If you use this library in an academic publication, I would be ever so greatful if you cited it as follows:
+
+Mika Hämäläinen. (2018, January 9). Python Korp Library (Version v1). Zenodo. http://doi.org/10.5281/zenodo.1143374
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1143374.svg)](https://doi.org/10.5281/zenodo.1143374)
+
 # Licence
 Apache License 2.0
 (C) 2017 [Mika Hämäläinen](https://mikakalevi.com)
