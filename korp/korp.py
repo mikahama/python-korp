@@ -1,7 +1,7 @@
 #encoding: utf-8
 import requests, json, codecs, os
 
-services = {"GT":"http://gtweb.uit.no/cgi-bin/korp_2016/korp.cgi", "kielipankki":"https://korp.csc.fi/cgi-bin/korp.cgi", "språkbanken":"https://ws.spraakbanken.gu.se/ws/korp"}
+services = {"GT":"http://gtweb.uit.no/cgi-bin/korp_2016/korp.cgi", "kielipankki":"https://korp.csc.fi/cgi-bin/korp.cgi", "språkbanken":"https://ws.spraakbanken.gu.se/ws/korp/v7"}
 
 
 class URLNotDefinedError(Exception):
@@ -13,7 +13,25 @@ class ServiceNameError(Exception):
 class KorpQueryError(Exception):
     pass
 
-class Korp(object):
+def Korp(url=None, service_name=None):
+	if url is None and service_name is None:
+		raise URLNotDefinedError("Either url or service_name has to be specified")
+	if url is None:
+		if service_name not in services:
+			raise ServiceNameError("Unsupported service " + service_name + " use one of " + str(services.keys()))
+		else:
+			url = services[service_name]
+	else:
+		url = url
+	r = requests.get(url + "/info")
+	data = r.json()
+	if "version" in data:
+		return Korp7(url, None)
+	else:
+		return KorpOld(url, None)
+		
+
+class KorpOld(object):
 	"""docstring for Korp"""
 
 	def __init__(self, url=None, service_name=None):
@@ -142,4 +160,102 @@ class Korp(object):
 				payload[key] = self.__list_to_string_list__(payload[key])
 		return payload
 
+class Korp7(KorpOld):
+	"""docstring for Korp7"""
+	def __init__(self, url=None, service_name=None):
+		super(Korp7, self).__init__(url, service_name)
 
+	def list_corpora(self, limit_by_prefix=None, list_protected=False):
+		r = requests.get(self.url + "/info")
+		data = r.json()
+		self.__check_error__(data)
+		d = data["corpora"]
+		if not list_protected:
+			d = list(set(d) - set(data["protected_corpora"]))
+		if limit_by_prefix is None:
+			return d
+		else:
+			return_data = []
+			for item in d:
+				if item.startswith(limit_by_prefix):
+					return_data.append(item)
+			return return_data
+
+	def concordance(self, query, corpora, start=0, end=999, additional_parameters={"show":["word", "lemma", "lemmacomp", "pos", "msd", "ref", "dephead", "deprel", "lex"]}):
+		payload = {"cqp": query, "start": start, "end": end, "corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + "/query", data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["hits"], data["kwic"]
+
+	def corpus_information(self, corpora):
+		payload = {"corpus": self.__list_to_string_list__(corpora)}
+		r = requests.post(self.url + "/info", data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["corpora"]
+
+	def statistics(self, query, corpora, groupby, additional_parameters={}):
+		payload = {"groupby": groupby, "cqp": query, "corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + "/count", data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["corpora"]
+
+	def trend_diagram(self, query, corpora, additional_parameters={}):
+		payload = {"cqp": query, "corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/count_time', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["corpora"]
+
+	def time_span(self, corpora, additional_parameters={}):
+		payload = {"corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/timespan', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["corpora"]
+
+	def log_likelihood(self, query1, query2, corpora1, corpora2, groupby, additional_parameters={}):
+		payload = {"set1_cqp": query1, "set2_cqp": query2, "groupby": groupby, "set1_corpus": self.__list_to_string_list__(corpora1),"set2_corpus": self.__list_to_string_list__(corpora1)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/loglike', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data
+
+	def word_picture(self, word, corpora, additional_parameters={}):
+		payload = {"word": word, "corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/relations', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["relations"]
+
+	def word_picture_hits(self, head, corpora, relation, sources, additional_parameters={}):
+		payload = {"head": head, "rel":relation, "source": sources, "corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/relations_sentences', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["kwic"]
+
+	def lemgram_count(self, lemgrams, corpora, additional_parameters={}):
+		payload = {"lemgram": self.__list_to_string_list__(lemgrams),"corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/lemgram_count', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data
+
+	def structural_values(self, corpora, structure, additional_parameters={}):
+		payload = {"struct": structure,"corpus": self.__list_to_string_list__(corpora)}
+		payload.update(additional_parameters)
+		r = requests.post(self.url + '/struct_values', data=self.__prepare_payload__(payload))
+		data = r.json()
+		self.__check_error__(data)
+		return data["corpora"]
