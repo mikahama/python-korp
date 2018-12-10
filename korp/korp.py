@@ -259,3 +259,12 @@ class Korp7(KorpOld):
 		data = r.json()
 		self.__check_error__(data)
 		return data["corpora"]
+
+	def list_additional_parameters(self, funct):
+		help_data = json.load(codecs.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "api7_help.json"), "r", encoding="utf-8"))
+		if callable(funct):
+			funct = funct.__name__
+		if funct in help_data.keys():
+			return help_data[funct]
+		else:
+			return []
