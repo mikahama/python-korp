@@ -45,16 +45,19 @@ class KorpOld(object):
 		else:
 			self.url = url
 
-	def list_corpora(self, limit_by_prefix=None):
+	def list_corpora(self, limit_by_prefix=None, list_protected=False):
 		payload = {'command': 'info'}
 		r = requests.get(self.url, params=payload)
 		data = r.json()
 		self.__check_error__(data)
+		d = data["corpora"]
+		if not list_protected:
+			d = list(set(d) - set(data["protected_corpora"]))
 		if limit_by_prefix is None:
-			return data["corpora"]
+			return d
 		else:
 			return_data = []
-			for item in data["corpora"]:
+			for item in d:
 				if item.startswith(limit_by_prefix):
 					return_data.append(item)
 			return return_data
