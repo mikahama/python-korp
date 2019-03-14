@@ -2,3 +2,6 @@ dependency_links.txt
 korp.egg-info
 test.bin
 korpitin.py
+dist
+build
+*.pyc
