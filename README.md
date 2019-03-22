@@ -12,7 +12,7 @@ You can initialise Korp with either service_name ([språkbanken](https://spraakb
 An example for getting all concordances for North Sami corpora in Giellatekno Korp for query _[pos=”A”] “go” [pos=”N”]_.
 
     from korp.korp import Korp
-    korppi = Korp(service_name="GT") #uses Giellatekno
+    korppi = Korp(service_name="GT") #uses Giellatekno, "kielipankki" and "språkbanken" are other possible service_name values
     corpora = korppi.list_corpora("SME") #lists corpora returns the ones starting with the North Sami language code
     number_of_results, concordances = korppi.all_concordances('[pos="A"] "go" [pos="N"]', corpora)
     
