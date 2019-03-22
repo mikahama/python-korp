@@ -22,7 +22,7 @@ See the Wiki for [a complete description](https://github.com/mikahama/python-kor
 
 # Cite
 
-If you use this grateful in an academic publication, I would be ever so greatful if you cited it as follows:
+If you use this in an academic publication, I would be ever so grateful if you cited it as follows:
 
 Mika Hämäläinen. (2018, January 9). Python Korp Library (Version v1). Zenodo. http://doi.org/10.5281/zenodo.1143374
 
