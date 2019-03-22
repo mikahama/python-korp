@@ -30,5 +30,5 @@ Mika Hämäläinen. (2018, January 9). Python Korp Library (Version v1). Zenodo.
 
 # Licence
 Apache License 2.0
-(C) 2017 [Mika Hämäläinen](https://mikakalevi.com)
+(C) 2017-2019 [Mika Hämäläinen](https://mikakalevi.com)
 
