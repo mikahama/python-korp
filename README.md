@@ -20,6 +20,13 @@ An example for getting all concordances for North Sami corpora in Giellatekno Ko
 
 See the Wiki for [a complete description](https://github.com/mikahama/python-korp/wiki) or my blog for [a real life Korp example](https://mikalikes.men/korp-and-python-access-corpora-from-your-python-code/).
 
+## Need for NLP solutions for your business?
+
+
+<img src="https://rootroo.com/cropped-logo-01-png/" alt="Rootroo logo" width="128px" height="128px">
+
+My company, [Rootroo offers consulting related to multilingual NLP tasks](https://rootroo.com/). We have a strong academic background in the state-of-the-art AI solutions for every NLP need. Just contact us, we won't bite.
+
 # Cite
 
 If you use this in an academic publication, I would be ever so grateful if you cited it as follows:
